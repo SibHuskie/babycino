@@ -474,5 +474,263 @@ async def rainbow(ctx):
         msg2.set_image(url="https://i.imgur.com/rItq9Ph.gifv")
         await client.edit_message(b, embed=msg2)
         await asyncio.sleep(float(2))
+        
+# d!!calculator <math problem>
+@client.command(pass_context=True)
+async def calculator(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please specify a math problem you want me to solve.")
+    else:
+        try:
+            answer = str(eval(args))
+            msg.add_field(name=":fax: Calculator", value="<@{}>: what is `{}`?\n \n<@{}>: {}".format(author.id, args, client.user.id, answer))
+        except:
+            msg.add_field(name=":fax: Calculator", value="<@{}>: I am having trouble solving that problem.".format(client.user.id))
+    await client.say(embed=msg)
+    
+# d!!rps <rock/paper/scissors>
+@client.command(pass_context=True)
+async def rps(ctx, o = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if o == None:
+        msg.add_field(name=error_img, value="Please choose what you want to use.\nExample: `}rps rock`.")
+    else:
+        if o == "rock" or o == "paper" or o == "scissors":
+            a = ["rock", "paper", "scissors"]
+            c = random.choice(a)
+            msg.add_field(name=":fist: **__ROCK, PAPER, SCISSORS__** :fist: ", value="**~~__==============================__~~**\n:arrow_forward: <@{}>\n------- `{}`\n:arrow_forward: <@{}>\n------- `{}`".format(author.id, o, client.user.id, c))
+            if o == "rock" and c == "scissors":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(author.id, client.user.id))
+            elif o == "paper" and c == "rock":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(author.id, client.user.id))
+            elif o == "scissors" and c == "paper":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(author.id, client.user.id))
+            elif o == "rock" and c == "paper":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(client.user.id, author.id))
+            elif o == "paper" and c == "scissors":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(client.user.id, author.id))
+            elif o == "scissors" and c == "rock":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(client.user.id, author.id))
+            else:
+                msg.add_field(name="**~~__==============================__~~**", value=":no_entry: It's a tie!")
+        else:
+            msg.add_field(name=error_img, value="Invalid choice.\nChoices: `rock`, `paper`, `scissors`.")
+    await client.say(embed=msg)
+
+# d!!kill <user>
+@client.command(pass_context=True)
+async def kill(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention the user you want to kill.")
+    else:
+        msgs = ["On a beautiful, sunny day, <@{}> went to the store. As they walked in to the store, they slipped and the doors cut off their head.".format(user.id),
+                "<@{}> was sitting on a tree, but because of their weight, the branch broke and they fell right on their head.".format(user.id),
+                "On a beautiful morning <@{}> suddenly jumped out of bed and started running towards the bathroom. However, they slipped on a banana and fell out of the window.".format(user.id),
+                "<@{}> watched the Emoji movie. The next day they died from too much cringe.".format(user.id),
+                "<@{}> was browsing the web one day. They accidentaly clicked on a pop-up saying 'DIE FOR FREE!'.".format(user.id),
+                "<@{}> got caught watching hentai. They had no choice but to kill themselves in order to wash away their sins.".format(user.id),
+                "All of <@{}>'s memes got stolen! They couldn't live for more than 0.420 seconds without memes.".format(user.id),
+                "<@{}> was walking down the village when all of a sudden a piano fell on top of them, crashing all their bones.".format(user.id),
+                "Long time ago <@{}> lived in peace and harmony, until the fire nation attacked. Now <@{}> is pretty much dead.".format(user.id, user.id),
+                "<@{}> died a virgin. LMAO what a loser.".format(user.id),
+                "<@{}> was playing hopscotch on a landmine field. You can tell how that went.".format(user.id),
+                "<@{}> was playing the Sims. Their computer crashed and they got a heart attack.".format(user.id),
+                "Wait, <@{}> died? Oh well.".format(user.id),
+                "<@{}> commited suicide. I guess it's a way of saying 'You can't fire me! I quit!' to God.".format(user.id),
+                "<@{}> gave their heart to <@{}>... Literally.".format(user.id, author.id),
+                "There hasn't been rain around the whole world, plants are dying and the temperatures are very high. <@{}> was a vegan.".format(user.id),
+                "<@{}> decided to go on the moon. However they forgot their space suit. All the kids wanted to hear about the corpse on the moon...".format(user.id),
+                "One day <@{}> was chilling with their friends. All of them were bored, they didn't have anything to do. One of them said 'So gentlemen, what do we do now?', <@{}> replied: 'We die.'. Yeah, they were really bored.".format(user.id, user.id),
+                "<@{}> tried to lay an egg. Humans can't do that, nor can bots!".format(user.id),
+                "All of <@{}>'s diamonds were stolen on their Christian minecraft server. Out of anger they said 'heck' and got killed instantly.".format(user.id),
+                "<@{}> forgot how to breathe.".format(user.id),
+                "<@{}> saw <@{}>'s face and instantly died.".format(user.id, author.id),
+                "...and then <@{}> said: I don't feel so good...".format(user.id),
+                "<@{}> livedn't.".format(user.id),
+                "<@{}> had a lot of mental disorders and couldn't live with them anymore. They commited suicide by cutting a deep wound on their chest with a kitchen knife.".format(user.id),
+                "<@{}> drowned <@{}> in a glass of water.".format(author.id, user.id),
+                "<@{}> threw <@{}> in a pool with sharks.".format(author.id, user.id),
+                "<@{}> spammed <@{}>'s DMs and they died from all the notifications they got.".format(author.id, user.id),
+                "<@{}> stole all of <@{}>'s chocolate. <@{}> simply couldn't live without their chocolate and decided that their life is not worth living anymore.".format(author.id, user.id, user.id),
+                "<@{}>'s toaster was hacked by <@{}>. They couldn't live with no toast.".format(user.id, author.id),
+                "<@{}> watched furry porn and died from what they saw.".format(user.id),
+                "<@{}> 'accidentally' fell off a building.".format(user.id),
+                "<@{}> may have ate food with cyanide.".format(user.id),
+                "<@{}> starved in a fast food restaurant. What a fucking idiot.".format(user.id),
+                "...And <@{}> died happily ever after... Wait no, I messed it up!".format(user.id),
+                "<@{}> joined this server and died. Oh well, that's not a first.".format(user.id),
+                "<@{}> was gay in Iran.".format(user.id),
+                "<@{}> choked on a banana ( ͡° ͜ʖ ͡°) and died.".format(user.id),
+                "<@{}> drove off a cliff and survived, but died from shock when they saw the high price of the hospital bill.".format(user.id),
+                "<@{}> listened to Justin Beiber for more than 0.69 seconds.".format(user.id),
+                "<@{}> drank too much anti-freeze.".format(user.id),
+                "<@{}> got stabbed with a cucumber by <@{}>.".format(user.id, author.id),
+                "<@{}> died from a heatstroke in the artic.".format(user.id),
+                "<@{}> tried to fly. It worked till they hit the ground.".format(user.id),
+                "<@{}> wanted to get a haircut in a faster way. They thought setting their hair on fire would do the trick.".format(user.id),
+                "On a peaceful night. The moon was shining and everyone was sleeping and enjoying their dreams while <@{}> suffocated in their pillow.".format(user.id),
+                "<@{}> got run over by a boat. A fricking boat!".format(user.id),
+                "What's that smell? It smells like toast... Hey, <@{}>! Don't take out the toast with a fork- too late...".format(user.id),
+                "<@{}> got a paper cut on both of their eyes, walked off a cliff and died. I guess books are evil.".format(user.id),
+                "<@{}> tried putting out fire with gasoline.".format(user.id),
+                "<@{}>'s head exploded while they were sitting on the toilet and pressing.".format(user.id),
+                "<@{}> died of laughter. No I mean they actually died.".format(user.id),
+                "<@{}> got locked in a refrigerator and died of hunger.".format(user.id),
+                "<@{}> drowned in their own tears after losing a game of Fortnite.".format(user.id),
+                "<@{}> got beat up by their imaginary friends.".format(user.id),
+                "<@{}> played My Little Ponny for too long.".format(user.id),
+                "<@{}> choked on air.".format(user.id),
+                "<@{}> got poked by Chuck Norris.".format(user.id),
+                "<@{}> took a selfie with a gun.".format(user.id),
+                "<@{}>'s brain exploded after <@{}> saying 'What if dolphins had legs?'.".format(user.id, author.id),
+                "<@{}> died after eating their favourite snack, tide pods.".format(user.id),
+                "<@{}> survived the biggest waves then tripped on a rock and died.".format(user.id),
+                "<@{}> ate white chocolate. Who the fuck eats white chocolate?".format(user.id),
+                "<@{}> demonstrated how to die and then had a heart attack. How ironic.".format(user.id),
+                "<@{}> fell in a toilet and then got flushed.".format(user.id),
+                "<@{}> got stuck in a vending machine.".format(user.id),
+                "<@{}> choked on their toothbrush and died.".format(user.id),
+                "<@{}> found their butthole and died from excitement.".format(user.id),
+                "<@{}> died. That's it. They just died.".format(user.id)]
+        msg.add_field(name=":newspaper2: ", value="{}".format(random.choice(msgs)))
+    await client.say(embed=msg)
+    
+# d!!eightball <yes or no question>
+@client.command(pass_context=True)
+async def eightball(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please ask a yes/no question.")
+    else:
+        if len(str(args)) > 1900:
+            msg.add_field(name=error_img, value="The question cannot be longer than 1900 characters.")
+        else:
+            a = ["Hell no!",
+                 "No!",
+                 "Hell yes!",
+                 "Yes!",
+                 "Definitely!",
+                 "Definitely not!",
+                 "Probably!",
+                 "Probably not!",
+                 "Most likely!",
+                 "Yes! I'm sure of it!",
+                 "No! I'm sure of it!"]
+            msg.add_field(name=":8ball: ", value=":grey_question: `Question:`\n<@{}>: {}\n \n:grey_exclamation: `Answer:`\n**Magic Eight Ball**: {}".format(author.id, args, random.choice(a)))
+    await client.say(embed=msg)
+    
+# dd!roast <user>
+@client.command(pass_context=True)
+async def roast(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention a user you want to roast.")
+    else:
+        a = ["<@{}>: Hey, <@{}>! I saw a piece of shit today... it reminded me of you.".format(author.id, user.id),
+             "<@{}>: You look familiar, <@{}>. Oh yeah! I see you in the trash.".format(author.id, user.id),
+             "<@{}>: Don't worry, <@{}>, you're not adopted. We're still searching for someone who wants you.".format(author.id, user.id),
+             "<@{}>: If I wanted to kill myself, I'd jump climb up your ego and jump in your IQ, <@{}>.".format(author.id, user.id),
+             "<@{}>: <@{}>, you are so stupid that you got hit by a parked car.".format(author.id, user.id),
+             "<@{}>: <@{}>, you are so fat and so old that when God created light, you were asked to move out of the way.".format(author.id, user.id),
+             "<@{}>: I heard <@{}> sucks so much that they were used as a vacuum cleaner.".format(author.id, user.id),
+             "<@{}>: Hey, <@{}>! Try to not spit when you talk, we don't need a public shower here.".format(author.id, user.id),
+             "<@{}>: I can't breathe when I see you, <@{}>... cause I'm suffocating from your bullshit.".format(author.id, user.id),
+             "<@{}>: <@{}>, you have the right to remain silent cause anything you say is probably going to be stupid anyway.".format(author.id, user.id),
+             "<@{}>: It's really hard to ignore <@{}>. Mostly cause they smell like shit.".format(author.id, user.id),
+             "<@{}>: <@{}>, did you fall from Heaven? Cause so did Satan.".format(author.id, user.id),
+             "<@{}>: <@{}>, were you sent to kill people? Cause your face is killing me.".format(author.id, user.id),
+             "<@{}>: If laughter is the best medicine, your face must be curing the world, <@{}>.".format(author.id, user.id),
+             "<@{}>: The only way you'll ever get laid is if you crawl up a chicken's ass and wait, <@{}>.".format(author.id, user.id),
+             "<@{}>: <@{}>, your family tree must be a cactus. Cause everyone on it is a prick.".format(author.id, user.id),
+             "<@{}>: <@{}>, save your breath, you'll need it to blow your date.".format(author.id, user.id),
+             "<@{}>: <@{}>, the zoo called. They are wondering how you got out of your cage?".format(author.id, user.id),
+             "<@{}>: <@{}>, you're so ugly that when you look in the mirror your reflection looks the away.".format(author.id, user.id),
+             "<@{}>: <@{}>, it's better to let someone think you're stupid than open your mouth and prove it.".format(author.id, user.id),
+             "<@{}>: I just stepped in something that is smarter than you, <@{}>... It smelled better too.".format(author.id, user.id),
+             "<@{}>: <@{}>, you're stupid just like your father when he thought he didn't need a condom.".format(author.id, user.id),
+             "<@{}>: <@{}> is so stupid that they stopped at a stop sign and waited for it to say go.".format(author.id, user.id),
+             "<@{}>: <@{}>, you're so ugly that you have to trick or treat over the phone.".format(author.id, user.id),
+             "<@{}>: <@{}>, you're so fat that your school photo was a double picture.".format(author.id, user.id),
+             "<@{}>: I'd like to kick <@{}> in the teeth but that would be an improvement for them.".format(author.id, user.id),
+             "<@{}>: <@{}> is so old that when they were in school there was no history class.".format(author.id, user.id),
+             "<@{}>: <@{}> is so stupid that they called me to ask me for my phone number.".format(author.id, user.id),
+             "<@{}>: <@{}>, at least my mom pretends to love me.".format(author.id, user.id),
+             "<@{}>: <@{}>, don't play hard to get when you are hard to want.".format(author.id, user.id),
+             "<@{}>: <@{}>, you're hating yourself too much for me to roast you.".format(author.id, user.id),
+             "<@{}>: <@{}>, I can't even call you ugly. Nature has beaten me to it.".format(author.id, user.id),
+             "<@{}>: People like you, <@{}>, are the reason God doens't talk to us anymore.".format(author.id, user.id),
+             "<@{}>: We all dislike you, <@{}>. But not quite enough to think about you.".format(author.id, user.id),
+             "<@{}>: <@{}>, you are a stupid.".format(author.id, user.id),
+             "<@{}>: <@{}>, I'd like to invite you to a nice, warming cup of shut the fuck up.".format(author.id, user.id),
+             "<@{}>: <@{}>, your mother might have told you, you can be whatever you want to but a cunt wasn't what she meant.".format(author.id, user.id),
+             "<@{}>: <@{}> is so fat, Thanos had to clap.".format(author.id, user.id)]
+        msg.add_field(name=":fire: Roast Machine", value="{}".format(random.choice(a)))
+    await client.say(embed=msg)
+    
+# d!!leave
+@client.command(pass_context=True)
+async def leave(ctx):
+    author = ctx.message.author
+    a = ["**{}** left the server!".format(author.name),
+         "**{}** left the game!".format(author.name),
+         "**{}** left your party!".format(author.name),
+         "**{}** left!".format(author.name),
+         "**{}** died!".format(author.name),
+         "**{}** has been killed!".format(author.name)]
+    await client.say(random.choice(a))
+    await client.delete_message(ctx.message)
+    
+# d!!rate <text>
+@client.command(pass_context=True)
+async def rate(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Nothing to rate given.")
+    else:
+        if len(str(args)) > 1900:
+            msg.add_field(name=error_img, value="The text cannot be longer than 1900 characters.")
+        else:
+            msg.add_field(name=":scales:", value=":arrow_forward: <@{}>\nI'd rate {} a {}/10!".format(author.id, args, random.randint(0, 11)))
+    await client.say(embed=msg)
+    
+# d!!urban <text>
+@client.command(pass_context=True)
+async def urban(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0xdaa520, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please give something you want to define.")
+    else:
+        if len(str(args)) > 150:
+            msg.add_field(name=error_img, value="The text cannot be longer than 150 characters.")
+        else:
+            try:
+                defs = ud.define('{}'.format(args))
+                msg.add_field(name=":bookmark_tabs: Urban Dictionary", value="<@{}>: What is {}?\n \n{}".format(author.id, args, random.choice(defs)))
+            except:
+                msg.add_field(name=":bookmark_tabs: Urban Dictionary", value="<@{}>: What is {}?\n \nNo definition found.".format(author.id))
+    await client.say(embed=msg)
 ##################################
 client.run(os.environ['BOT_TOKEN'])
