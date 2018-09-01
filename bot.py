@@ -33,6 +33,13 @@ async def on_ready():
     print("Ping: {}".format(round((t2-t1)*1000)))
     print("============================================================")
 
+@client.event
+async def on_message(message):
+    if message.content.lower().startswith('dd!test'):
+        await client.send_message(message.channel, "Testing 1 2 3...")
+    else:
+        await client.process_commands(message)
+        
 #EMOTE
 
 mocklinks = ["https://media1.tenor.com/images/e92185e00b00c8b2ef4199164e130d27/tenor.gif?itemid=8665747"]
