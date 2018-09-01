@@ -40,7 +40,7 @@ async def on_message(message):
     else:
         await client.process_commands(message)
         
-#EMOTE
+#################################################### EMOTE ########################################################
 
 mocklinks = ["https://media1.tenor.com/images/e92185e00b00c8b2ef4199164e130d27/tenor.gif?itemid=8665747"]
 
@@ -451,5 +451,28 @@ async def lick(ctx, user: discord.Member = None):
         msg.set_image(url="{}".format(random.choice(licklinks)))
         msg.add_field(name="**:coffee: EMOTE :coffee: **", value="<@{}> licked <@{}>! Uhm...".format(author.id, user.id))
     await client.say(embed=msg)
+    
+    
+################################################ FUN #####################################################
+# d!!rainbow
+@client.command(pass_context=True)
+async def rainbow(ctx):
+    color = discord.Color(random.randint(0x000000, 0xFFFFFF))
+    msg = discord.Embed(colour=color, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    msg.add_field(name=":rainbow: RAINBOWS :rainbow: ", value=":rainbow: R A I N B O W S :rainbow: ")
+    channel = ctx.message.channel
+    b = await client.send_message(channel, embed=msg)
+    g = [":large_blue_circle:", ":red_circle:", ":white_circle:", ":purple_heart:", ":green_heart:", ":yellow_heart:", ":black_circle:"]
+    for i in range(20):
+        color = discord.Color(random.randint(0x000000, 0xFFFFFF))
+        msg2 = discord.Embed(colour=color, description= "")
+        msg2.title = ""
+        msg2.set_footer(text=footer_text)
+        msg2.add_field(name=":rainbow: RAINBOWS :rainbow: ", value=":rainbow: **__R A I N B O W S__** :rainbow: ")
+        msg2.set_image(url="https://i.imgur.com/rItq9Ph.gifv")
+        await client.edit_message(b, embed=msg2)
+        await asyncio.sleep(float(2))
 ##################################
 client.run(os.environ['BOT_TOKEN'])
