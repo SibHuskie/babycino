@@ -20,6 +20,19 @@ footer_text = "Depresso Espresso"
 error_img = ':coffee: '
 default_invite = 'https://discord.gg/4YfDAKq'
 
+@client.event
+async def on_ready():
+    t1 = time.perf_counter()
+    print("============================================================")
+    print("Name: {}".format(client.user.name))
+    print("ID: {}".format(client.user.id))
+    print("============================================================")
+    await client.change_presence(game=discord.Game(name='on Depresso Espresso'))
+    await client.wait_until_ready()
+    t2 = time.perf_counter()
+    print("Ping: {}".format(round((t2-t1)*1000)))
+    print("============================================================")
+
 #EMOTE
 
 mocklinks = ["https://media1.tenor.com/images/e92185e00b00c8b2ef4199164e130d27/tenor.gif?itemid=8665747"]
